@@ -1,0 +1,20 @@
+
+Clinical Data:
+- pull out visit 2 from visit level table
+- gender
+- race
+- age
+- BMI
+- smoking status
+- GOLD stage (final GOLD P2)
+- look at lucas' paper
+
+Metabolomics:
+- dont use one with Nan or missing data
+- ask sunee
+
+Transcriptomics:
+- preprocessed RNA seq
+
+Proteomics:
+- P2 somascan 5.0 4k
