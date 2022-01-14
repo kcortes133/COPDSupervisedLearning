@@ -8,10 +8,13 @@ Clinical Data:
 - smoking status
 - GOLD stage (final GOLD P2)
 - look at lucas' paper
+- COPDGene_P1P2P3_25SEP2020_VisitLevel.csv
 
 Metabolomics:
 - dont use one with Nan or missing data
-- ask sunee
+- "COPDGene_P2_LT20miss_knnImp_NoOut_metabs_20211021.csv" file (n=1130)
+- where we've done a kNN (k=10) imputation for missing metabolite values and the outliers were removed
+COPDGene_P2_LT20miss_knnImp_NoOut_metabs_20211021.csv
 
 Transcriptomics:
 - preprocessed RNA seq
