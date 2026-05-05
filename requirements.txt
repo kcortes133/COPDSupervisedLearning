@@ -1,0 +1,16 @@
+# Core scientific stack
+numpy
+pandas
+matplotlib
+
+# Machine learning
+# NOTE: this project uses the `plot_confusion_matrix` and `metrics.plot_roc_curve`
+# helpers, which were deprecated in scikit-learn 1.0 and removed in 1.2.
+# Pin to a compatible release.
+scikit-learn<1.2
+
+# Gradient boosting
+xgboost
+
+# Gene-set enrichment (used by geneSetEnrichment.py)
+gseapy

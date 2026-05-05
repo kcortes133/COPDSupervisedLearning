@@ -1,0 +1,18 @@
+xlxs is from vendor
+lots of missing data with metabolomics
+
+2080 is binary if its there or not
+
+ask sunee what to use
+    - email
+    - cc KK
+    - ask for short readme
+    - naming conventions
+    - whats been done on the datasets
+
+dont use the one with NAs
+dont want to use ones with missing data
+
+will probably use one of the LT20
+    - knn is k nearest neighbors
+

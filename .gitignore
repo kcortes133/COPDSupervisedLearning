@@ -138,10 +138,21 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# Medical Datasets
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Medical Datasets (COPDGene — restricted access; not redistributable)
 Metabolomics/
 Clinical Variables/
 preprocessedRNAseq/
 Proteomics/
 Transcriptomics/
 Metabolomics/info.txt
+
+# Local archive of figures, slide decks, and exploratory artifacts
+archive/
