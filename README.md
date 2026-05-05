@@ -19,15 +19,18 @@ reproducibility; this README documents how to run it.
 
 ```
 COPDSupervisedLearning/
-├── main.py                 # End-to-end pipeline: load → align → filter → classify
-├── getData.py              # Reads clinical CSV, joins omics on `sid`
-├── dataExploration.py      # PCA, log transform, standardization, k-best feature selection
-├── neuralNetwork.py        # Voting classifier, RandomForest, XGBoost wrappers
-├── plots.py                # ROC, class-probability bars, prediction histograms
-├── geneSetEnrichment.py    # Stub for GSEA via gseapy
-├── test.py                 # Earlier scratch driver (kept for reference)
+├── src/                    # All source code lives here
+│   ├── main.py             # End-to-end pipeline: load → align → filter → classify
+│   ├── getData.py          # Reads clinical CSV, joins omics on `sid`
+│   ├── dataExploration.py  # PCA, log transform, standardization, k-best feature selection
+│   ├── neuralNetwork.py    # Voting classifier, RandomForest, XGBoost wrappers
+│   ├── plots.py            # ROC, class-probability bars, prediction histograms
+│   ├── geneSetEnrichment.py# Stub for GSEA via gseapy
+│   └── test.py             # Earlier scratch driver (broken, kept for reference)
+│
 ├── dataInfo.txt            # Notes on which raw COPDGene files this expects
 ├── requirements.txt        # Python dependencies
+├── README.md
 ├── .gitignore              # Excludes data folders, venv, archive/, IDE files
 ├── archive/                # Old slide decks, presentation figures (gitignored)
 │
@@ -40,9 +43,11 @@ COPDSupervisedLearning/
 
 ## Data
 
-The pipeline expects the following files at the paths shown. They are **not**
-included in this repository — COPDGene data is access-controlled and must be
-requested from the [COPDGene study](http://www.copdgene.org/).
+The pipeline expects the following files at the paths shown (paths are
+relative to the repository root, since `src/main.py` is run from the root —
+see *Usage* below). The data is **not** included in this repository —
+COPDGene is access-controlled and must be requested from the
+[COPDGene study](http://www.copdgene.org/).
 
 | Modality                       | Expected path                                                              |
 | ------------------------------ | -------------------------------------------------------------------------- |
@@ -58,7 +63,7 @@ visits (`visitnum == 2`) are kept. Clinical features extracted: `gender`,
 
 See `dataInfo.txt` for the original notes on file selection.
 
-## Pipeline (`main.py`)
+## Pipeline (`src/main.py`)
 
 1. **Load** — read clinical, metabolomic, proteomic, and transcriptomic tables.
 2. **Align** — inner-join all four on `sid` so every retained subject has
@@ -94,23 +99,28 @@ source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Place the COPDGene data files in the expected paths (see Data section above).
+Place the COPDGene data files in the expected paths (see *Data* section above).
 
 ## Usage
 
-Run the full pipeline:
+Run the full pipeline **from the repository root** so that the relative data
+paths inside `main.py` resolve correctly. Python automatically adds the
+script's directory to `sys.path`, so the sibling-module imports inside `src/`
+(e.g. `import dataExploration, getData`) just work:
 
 ```bash
-python main.py
+python src/main.py
 ```
 
 `main.py` opens matplotlib windows for each plot (PCA, ROC, confusion
 matrices, etc.). Close each window to advance to the next.
 
-`test.py` is an earlier scratch driver kept for reference; it explores PCA
-and gender-classification baselines on individual modalities.
+`src/test.py` is an earlier scratch driver kept for reference; it is **not
+runnable as-is** (it references symbols never defined in the file and uses
+function signatures that have since changed). See its module docstring for
+details.
 
-## Module reference
+## Module reference (`src/`)
 
 - `getData.getClinicalData(df)` — selects the Phase-2 clinical columns used
   downstream and filters to `visitnum == 2`.
@@ -124,6 +134,10 @@ and gender-classification baselines on individual modalities.
   ensemble and renders ROC, confusion matrix, and class-probability plots.
 - `plots.kROC` / `plots.classProbs` / `plots.predGold` / `plots.predEmph` —
   evaluation visualizations.
+
+Each module has a top-of-file docstring summarizing its public surface, and
+every function carries a docstring describing its inputs, outputs, and role
+in the pipeline.
 
 ## Author
 
